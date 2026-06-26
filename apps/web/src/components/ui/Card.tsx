@@ -2,7 +2,7 @@
 
 import React from "react";
 
-interface CardProps {
+interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   className?: string;
   hover?: boolean;
@@ -16,6 +16,7 @@ export function Card({
   hover = true,
   glass = false,
   padding = "md",
+  ...props
 }: CardProps) {
   const paddings = { sm: "p-4", md: "p-6", lg: "p-8" };
 
@@ -28,7 +29,7 @@ export function Card({
     : "";
 
   return (
-    <div className={`${base} ${paddings[padding]} ${hoverEffect} ${className}`}>
+    <div className={`${base} ${paddings[padding]} ${hoverEffect} ${className}`} {...props}>
       {children}
     </div>
   );
