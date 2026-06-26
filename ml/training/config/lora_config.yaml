@@ -1,0 +1,64 @@
+# LoRA/QLoRA Fine-tuning Configuration for Legal Document Analysis
+# Base model: Meta Llama (7B/8B)
+
+model:
+  name: "meta-llama/Llama-3.1-8B-Instruct"
+  quantization:
+    enabled: true
+    bits: 4
+    quant_type: "nf4"
+    double_quant: true
+    compute_dtype: "bfloat16"
+
+lora:
+  r: 16                    # LoRA rank
+  lora_alpha: 32           # LoRA scaling factor
+  lora_dropout: 0.05       # Dropout for LoRA layers
+  target_modules:          # Apply LoRA to all linear layers
+    - "q_proj"
+    - "k_proj"
+    - "v_proj"
+    - "o_proj"
+    - "gate_proj"
+    - "up_proj"
+    - "down_proj"
+  bias: "none"
+  task_type: "CAUSAL_LM"
+
+training:
+  num_epochs: 3
+  per_device_train_batch_size: 4
+  per_device_eval_batch_size: 4
+  gradient_accumulation_steps: 4
+  learning_rate: 2.0e-4
+  weight_decay: 0.01
+  warmup_ratio: 0.03
+  lr_scheduler_type: "cosine"
+  max_seq_length: 2048
+  logging_steps: 10
+  eval_steps: 100
+  save_steps: 200
+  fp16: false
+  bf16: true
+  gradient_checkpointing: true
+  optim: "paged_adamw_32bit"
+
+data:
+  train_split: 0.8
+  val_split: 0.1
+  test_split: 0.1
+  max_samples: null        # Set to limit dataset size for testing
+  seed: 42
+
+tasks:
+  - summarization
+  - clause_extraction
+  - risk_classification
+  - legal_qa
+
+mlflow:
+  experiment_name: "legora-legal-finetuning"
+  tracking_uri: "http://localhost:5000"
+  tags:
+    project: "legora-ai"
+    model_family: "llama"

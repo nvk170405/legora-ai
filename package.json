@@ -1,0 +1,24 @@
+{
+  "name": "legora-ai",
+  "version": "0.1.0",
+  "private": true,
+  "description": "AI-powered contract analysis platform",
+  "scripts": {
+    "dev": "turbo run dev",
+    "dev:api": "cd apps/api && uvicorn src.main:app --host 0.0.0.0 --port 8000 --reload",
+    "dev:web": "cd apps/web && npm run dev",
+    "build": "turbo run build",
+    "lint": "turbo run lint",
+    "test": "turbo run test",
+    "clean": "turbo run clean && rm -rf node_modules"
+  },
+  "devDependencies": {
+    "turbo": "^2.5.0",
+    "prettier": "^3.5.0",
+    "@types/node": "^22.0.0",
+    "typescript": "^5.7.0"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}

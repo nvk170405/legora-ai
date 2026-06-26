@@ -1,0 +1,65 @@
+# ===== Node =====
+node_modules/
+.next/
+out/
+dist/
+.turbo/
+.vercel/
+
+# ===== Python =====
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.eggs/
+*.egg
+.venv/
+venv/
+env/
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+htmlcov/
+.coverage
+*.cover
+
+# ===== Environment =====
+.env
+.env.local
+.env.*.local
+!.env.example
+
+# ===== Docker =====
+docker-volumes/
+
+# ===== ML/Data =====
+ml/data/raw/
+ml/data/processed/
+ml/data/splits/
+*.pt
+*.bin
+*.safetensors
+*.gguf
+mlruns/
+mlartifacts/
+
+# ===== IDEs =====
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# ===== Build =====
+*.log
+*.tsbuildinfo
+
+# ===== MinIO =====
+minio-data/
+
+# ===== OS =====
+.DS_Store
+Thumbs.db
+desktop.ini
